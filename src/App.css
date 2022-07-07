@@ -1,0 +1,52 @@
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+button,
+input {
+  padding: 0;
+  margin: 0;
+}
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+button,
+input,
+div,
+span,
+a {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", "Arial", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  font-family: inherit;
+}
+
+button {
+  outline: none;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
