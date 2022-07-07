@@ -65,7 +65,19 @@ button {
   height: 64px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  padding-bottom: 1%;
+}
+
+.cell .figure__logo {
+  width: 52px;
+  height: 52px;
+  position: relative;
+}
+
+.cell .figure__logo.pawn {
+  width: 44px;
+  height: 44px;
 }
 
 .black {
@@ -73,5 +85,5 @@ button {
 }
 
 .white {
-  background: honeydew;
+  background: #d3d3d3;
 }
