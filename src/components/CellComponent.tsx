@@ -17,7 +17,7 @@ const CellComponent: FC<CellProps> = ({ cell, selected, onCellClick, selectedCel
             className={classNames('cell', cell.color, selected ? 'selected' : '', selectedCell && cell.available && cell.figure ? 'available' : '')}
             onClick={() => onCellClick(cell)}
         >
-            {!cell.figure && cell.available && <div className={"available"} />}
+            {selectedCell && !cell.figure && cell.available && <div className={"available"} />}
             {cell.figure?.logo && <img
                 className={classNames("figure__logo", cell.figure?.name)}
                 src={cell.figure.logo}
