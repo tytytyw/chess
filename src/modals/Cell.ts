@@ -7,17 +7,25 @@ export class Cell {
     readonly color: Colors;
     figure: Figure | null;
     board: Board
-    avilable: boolean;
+    available: boolean;
     id: string;
 
-    constructor(board: Board, x: number, y: number, color: Colors, figure: Figure | null, avilable: boolean, id?: string) {
+    constructor(board: Board, x: number, y: number, color: Colors, figure: Figure | null, available: boolean, id?: string) {
         this.x = x;
         this.y = y;
         this.color = color;
         this.figure = figure;
         this.board = board;
-        this.avilable = avilable
+        this.available = available
         // TODO:
         this.id = `${x}_${y}`;
+    }
+
+    moveFigre(target: Cell) {
+        if (this?.figure?.canMove(target)) {
+            this.figure.moveFigure(target)
+            target.figure = this.figure
+            this.figure = null
+        }
     }
 }
