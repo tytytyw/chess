@@ -14,7 +14,13 @@ export class King extends Figure {
 
     canMove(target: Cell): boolean {
         if (!super.canMove(target)) return false
+        const dx = Math.abs(target.x - this.cell.x)
+        const dy = Math.abs(target.y - this.cell.y)
 
-        return true
+        if (dx <= 1 && dy <= 1) return true
+
+        // TODO: Castling
+
+        return false
     }
 }

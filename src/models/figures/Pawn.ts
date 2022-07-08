@@ -26,9 +26,12 @@ export class Pawn extends Figure {
             && target.x === this.cell.x
             && this.cell.board.getCell(target.x, target.y).isEmpty()) return true
         // attack step
+        // TODO: en passant
         if ((target.y === this.cell.y + direction)
             && (target.x === this.cell.x + 1 || (target.x === this.cell.x - 1))
             && this.cell.isEnemy(target)) return true
+
+        // TODO: Promotion 
 
         return false
     }
