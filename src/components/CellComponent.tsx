@@ -1,4 +1,4 @@
-import { Cell } from "../modals/Cell"
+import { Cell } from "../models/Cell"
 import React, { FC } from 'react'
 import classNames from "classnames"
 

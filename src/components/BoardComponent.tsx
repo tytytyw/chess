@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
-import { Board } from '../modals/Board'
-import { Cell } from '../modals/Cell';
+import { Board } from '../models/Board'
+import { Cell } from '../models/Cell';
 import CellComponent from './CellComponent';
 
 interface BoardProps {
