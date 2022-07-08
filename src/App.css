@@ -52,7 +52,11 @@ button {
   align-items: center;
 }
 
-.board {
+.BoardComponent__title {
+  line-height: 1.5;
+}
+
+.BoardComponent__board {
   width: calc(64px * 8);
   height: calc(64px * 8);
   display: flex;

@@ -1,14 +1,17 @@
 import React, { FC, useState, useEffect } from 'react'
 import { Board } from '../models/Board'
 import { Cell } from '../models/Cell';
+import { Player } from '../models/Player';
 import CellComponent from './CellComponent';
 
 interface BoardProps {
   board: Board;
-  setBoard: (board: Board) => void
+  setBoard: (board: Board) => void;
+  currentPlayer: Player;
+  swapPlayer: () => void
 }
 
-const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
+const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPlayer }) => {
 
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
 
@@ -16,7 +19,8 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
     if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
       selectedCell.moveFigre(cell);
       setSelectedCell(null)
-    } else if (cell.figure) {
+      swapPlayer()
+    } else if (cell.figure && currentPlayer.color === cell.figure?.color) {
       setSelectedCell(prevCell => prevCell === cell ? null : cell)
     }
   }
@@ -38,19 +42,21 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
 
 
   return (
-    <div className='board'>
-      {board.cells.map((row, index) => <React.Fragment key={index}>
-        {row.map(cell =>
-          <CellComponent
-            cell={cell}
-            key={cell.id}
-            selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
-            selectedCell={selectedCell}
-            onCellClick={onCellClick}
-          />
-        )}
-      </React.Fragment>)}
-    </div >
+    <div className='BoardComponent'>
+      <h3 className='BoardComponent__title'>Ходят <span>{currentPlayer.colorName}</span></h3>
+      <div className='BoardComponent__board'>
+        {board.cells.map((row, index) => <React.Fragment key={index}>
+          {row.map(cell =>
+            <CellComponent
+              cell={cell}
+              key={cell.id}
+              selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
+              selectedCell={selectedCell}
+              onCellClick={onCellClick}
+            />
+          )}
+        </React.Fragment>)}
+      </div ></div>
   )
 }
 
