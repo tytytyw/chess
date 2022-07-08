@@ -52,8 +52,47 @@ button {
   align-items: center;
 }
 
+.App__wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.statistic {
+  width: 20vw;
+  padding-top: calc(1.3rem * 2);
+  align-self: stretch;
+}
+
+.lostFigures {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  border: 2px solid rgb(95, 95, 95);
+  border-left: 0;
+  background: #d3d3d3;
+}
+
+.lostFigures .LostFiguresComponent {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.lostFigures .LostFiguresComponent .lost-figure {
+  width: 20%;
+  display: inline-block;
+}
+
+.lostFigures .LostFiguresComponent .lost-figure__logo {
+  width: 100%;
+  object-fit: contain;
+}
+
 .BoardComponent__title {
-  line-height: 1.5;
+  font-size: 1.3rem;
+  line-height: 2;
 }
 
 .BoardComponent__board {

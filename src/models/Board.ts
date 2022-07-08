@@ -6,10 +6,13 @@ import { Queen } from './figures/Queen';
 import { Colors } from './Colors';
 import { Cell } from './Cell';
 import { Pawn } from './figures/Pawn';
+import { Figure } from './figures/Figure';
 
 
 export class Board {
     cells: Cell[][] = []
+    lostBlackFigures: Array<Figure> = []
+    lostWhiteFigures: Array<Figure> = []
 
     public initCells() {
         for (let y = 0; y < 8; y++) {
@@ -81,7 +84,16 @@ export class Board {
     public getCopyBoard(): Board {
         const newBoard = new Board()
         newBoard.cells = this.cells
+        newBoard.lostWhiteFigures = this.lostWhiteFigures
+        newBoard.lostBlackFigures = this.lostBlackFigures
         return newBoard
+    }
+
+
+    addLostFigure(figure: Figure) {
+        figure.color === Colors.BLACK
+            ? this.lostBlackFigures.push(figure)
+            : this.lostWhiteFigures.push(figure)
     }
 
     public highLightCells(selectedCell: Cell | null) {

@@ -80,9 +80,14 @@ export class Cell {
         this.figure.cell = this
     }
 
+    addLostFigure(figure: Figure) {
+        this.board.addLostFigure(figure)
+    }
+
     moveFigre(target: Cell): void {
         if (this?.figure?.canMove(target)) {
             this.figure.moveFigure(target)
+            if (target.figure) this.addLostFigure(target.figure)
             target.figure = this.figure
             target.setFigure(this.figure)
             this.figure = null
