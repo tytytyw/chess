@@ -19,6 +19,8 @@ export class Figure {
     name: FigureNames;
     id: number
 
+    isFirstStep = false
+
     constructor(color: Colors, cell: Cell) {
         this.color = color;
         this.cell = cell;

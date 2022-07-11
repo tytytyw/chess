@@ -9,6 +9,7 @@ export class Cell {
     board: Board
     available: boolean;
     id: string;
+    isCastling: boolean;
 
     constructor(board: Board, x: number, y: number, color: Colors, figure: Figure | null, available: boolean, id?: string) {
         this.x = x;
@@ -19,6 +20,8 @@ export class Cell {
         this.available = available
         // TODO:
         this.id = `${x}_${y}`;
+        this.isCastling = false;
+
     }
 
     isEmpty(): boolean {
@@ -76,6 +79,7 @@ export class Cell {
     }
 
     setFigure(figure: Figure) {
+        // console.log(this, figure)
         this.figure = figure
         this.figure.cell = this
     }
@@ -84,11 +88,13 @@ export class Cell {
         this.board.addLostFigure(figure)
     }
 
-    moveFigre(target: Cell): void {
+    moveFigure(target: Cell): void {
+        // console.log(target)
+        // console.log(this.board.getCell(target.x, target.y))
         if (this?.figure?.canMove(target)) {
             this.figure.moveFigure(target)
             if (target.figure) this.addLostFigure(target.figure)
-            target.figure = this.figure
+            // target.figure = this.figure
             target.setFigure(this.figure)
             this.figure = null
         }

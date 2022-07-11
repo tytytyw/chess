@@ -5,6 +5,7 @@ import blackLogo from '../../assets/black-rook.png'
 import whiteLogo from '../../assets/white-rook.png'
 
 export class Rook extends Figure {
+    isFirstStep = true
 
     constructor(color: Colors, cell: Cell) {
         super(color, cell);
@@ -19,5 +20,10 @@ export class Rook extends Figure {
         // TODO: Castling
 
         return false
+    }
+
+    moveFigure(target: Cell): void {
+        super.moveFigure(target)
+        this.isFirstStep = false
     }
 }
