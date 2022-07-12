@@ -6,13 +6,14 @@ import { Queen } from './figures/Queen';
 import { Colors } from './Colors';
 import { Cell } from './Cell';
 import { Pawn } from './figures/Pawn';
-import { Figure } from './figures/Figure';
+import { Figure, FigureNames } from './figures/Figure';
 
 
 export class Board {
     cells: Cell[][] = []
     lostBlackFigures: Array<Figure> = []
     lostWhiteFigures: Array<Figure> = []
+    enPassantCell: Cell | null = null
 
     public initCells() {
         for (let y = 0; y < 8; y++) {
@@ -90,7 +91,7 @@ export class Board {
     }
 
 
-    addLostFigure(figure: Figure) {
+    public addLostFigure(figure: Figure) {
         figure.color === Colors.BLACK
             ? this.lostBlackFigures.push(figure)
             : this.lostWhiteFigures.push(figure)
@@ -102,7 +103,17 @@ export class Board {
             for (let x = 0; x < this.cells.length; x++) {
                 const target = row[x];
                 target.available = !!selectedCell?.figure?.canMove(target)
+                if (target === target.board.enPassantCell
+                    && selectedCell?.figure?.name === FigureNames.PAWN
+                    && Math.abs(target.x - selectedCell.x) === 1
+                    && Math.abs(target.y - selectedCell.y) === 1) {
+                    this.highLightCell(this.getCell(target.x, selectedCell.y))
+                }
             }
         }
+    }
+
+    private highLightCell(target: Cell) {
+        if (target.figure?.aviableToEnPassant) target.available = true
     }
 }

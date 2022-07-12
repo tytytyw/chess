@@ -1,4 +1,4 @@
-import { Figure } from './figures/Figure';
+import { Figure, FigureNames } from './figures/Figure';
 import { Board } from './Board';
 import { Colors } from './Colors';
 export class Cell {
@@ -10,6 +10,7 @@ export class Cell {
     available: boolean;
     id: string;
     isCastling: boolean;
+    playerColor?: Colors
 
     constructor(board: Board, x: number, y: number, color: Colors, figure: Figure | null, available: boolean, id?: string) {
         this.x = x;
@@ -24,15 +25,15 @@ export class Cell {
 
     }
 
-    isEmpty(): boolean {
+    public isEmpty(): boolean {
         return this.figure === null
     }
 
-    isEnemy(target: Cell): boolean {
+    public isEnemy(target: Cell): boolean {
         return !!target.figure && this.figure?.color !== target.figure?.color
     }
 
-    isEmptyVertical(target: Cell): boolean {
+    public isEmptyVertical(target: Cell): boolean {
         if (this.x !== target.x) return false
 
         const min = Math.min(this.y, target.y)
@@ -47,7 +48,7 @@ export class Cell {
         return true
     }
 
-    isEmptyHorizontal(target: Cell): boolean {
+    public isEmptyHorizontal(target: Cell): boolean {
         if (this.y !== target.y) return false
 
         const min = Math.min(this.x, target.x)
@@ -62,7 +63,7 @@ export class Cell {
         return true
     }
 
-    isEmptyDiagonal(target: Cell): boolean {
+    public isEmptyDiagonal(target: Cell): boolean {
         const absX = Math.abs(target.x - this.x)
         const absY = Math.abs(target.y - this.y)
 
@@ -78,25 +79,33 @@ export class Cell {
         return true
     }
 
-    setFigure(figure: Figure) {
-        // console.log(this, figure)
+    public setFigure(figure: Figure) {
         this.figure = figure
         this.figure.cell = this
     }
 
-    addLostFigure(figure: Figure) {
+    public addLostFigure(figure: Figure) {
         this.board.addLostFigure(figure)
     }
 
-    moveFigure(target: Cell): void {
-        // console.log(target)
-        // console.log(this.board.getCell(target.x, target.y))
+    public moveFigure(target: Cell): void {
+
         if (this?.figure?.canMove(target)) {
             this.figure.moveFigure(target)
             if (target.figure) this.addLostFigure(target.figure)
-            // target.figure = this.figure
             target.setFigure(this.figure)
+            if (target === target.board.enPassantCell && this.figure?.name === FigureNames.PAWN) this.enPassantAttackMove(target)
             this.figure = null
+
+            // en passant aviable only fo next move
+            if (target.figure?.color !== this.board.enPassantCell?.playerColor) this.board.enPassantCell = null
         }
+    }
+
+    private enPassantAttackMove(targetCell: Cell) {
+        const targetFigure = this.board.getCell(targetCell.x, targetCell.y + (targetCell.figure?.color === Colors.BLACK ? -1 : 1))
+        targetFigure.figure && this.addLostFigure(targetFigure.figure)
+        targetCell.available = false
+        targetFigure.figure = null
     }
 }

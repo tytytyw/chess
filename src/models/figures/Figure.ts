@@ -17,7 +17,8 @@ export class Figure {
     logo: typeof logo | null;
     cell: Cell;
     name: FigureNames;
-    id: number
+    id: number;
+    aviableToEnPassant: boolean
 
     isFirstStep = false
 
@@ -29,15 +30,16 @@ export class Figure {
         this.name = FigureNames.FIGURE
         // TODO:
         this.id = Math.random();
+        this.aviableToEnPassant = false;
     }
 
-    canMove(target: Cell): boolean {
+    public canMove(target: Cell): boolean {
         if (target.figure?.color === this.color) return false
         if (target.figure?.name === FigureNames.KING) return false
         return true
     }
 
-    moveFigure(target: Cell) {
+    public moveFigure(target: Cell) {
 
     }
 }

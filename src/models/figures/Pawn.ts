@@ -25,11 +25,16 @@ export class Pawn extends Figure {
         if ((target.y === step || (this.isFirstStep && (target.y === firstStep)))
             && target.x === this.cell.x
             && this.cell.board.getCell(target.x, target.y).isEmpty()) return true
+
         // attack step
-        // TODO: en passant
         if ((target.y === this.cell.y + direction)
             && (target.x === this.cell.x + 1 || (target.x === this.cell.x - 1))
             && this.cell.isEnemy(target)) return true
+
+        if (target === target.board.enPassantCell
+            && Math.abs(target.y - this.cell.y) === 1
+            && Math.abs(target.x - this.cell.x) === 1
+        ) return true
 
         // TODO: Promotion 
 
@@ -37,7 +42,16 @@ export class Pawn extends Figure {
     }
 
     moveFigure(target: Cell) {
-        super.moveFigure(target)
         this.isFirstStep = false
+
+        const dy = target.y - this.cell.y
+        const longMove = Math.abs(dy) === 2
+        if (longMove) {
+            const cell = target.board.getCell(target.x, dy === 2 ? target.y - 1 : target.y + 1)
+            cell.playerColor = this.color
+            target.board.enPassantCell = cell
+            this.aviableToEnPassant = true
+        }
+        super.moveFigure(target)
     }
 }
