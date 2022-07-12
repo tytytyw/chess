@@ -69,8 +69,12 @@ button {
   justify-content: space-between;
   height: 100%;
   border: 2px solid rgb(95, 95, 95);
-  border-left: 0;
   background: #d3d3d3;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
 }
 
 .lostFigures .LostFiguresComponent {
@@ -90,6 +94,10 @@ button {
   object-fit: contain;
 }
 
+.BoardComponent {
+  margin-right: 2%;
+}
+
 .BoardComponent__title {
   font-size: 1.3rem;
   line-height: 2;
@@ -100,8 +108,14 @@ button {
   height: calc(64px * 8);
   display: flex;
   flex-wrap: wrap;
-  border: 2px solid rgb(95, 95, 95);
   box-sizing: content-box;
+  border: 2px solid rgb(95, 95, 95);
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  overflow: hidden;
 }
 
 .cell {
