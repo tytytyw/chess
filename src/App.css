@@ -174,3 +174,81 @@ button {
 .white {
   background: #d3d3d3;
 }
+
+.SwapFigureComponent {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, .7);
+  top: 0;
+  left: 0;
+}
+
+.SwapFigureComponent .title {
+  top: calc(50% - 5rem);
+  position: absolute;
+  text-align: center;
+  color: #d3d3d3;
+  width: 100%;
+  font-size: 1.5rem;
+  line-height: 1%;
+}
+
+.SwapFigureComponent .figures {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  background: #d3d3d3;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+  width: calc(5rem * 4);
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: content-box;
+}
+
+.SwapFigureComponent .figures .figure {
+  cursor: pointer;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  transition: background .2s ease;
+  -webkit-transition: background .2s ease;
+  -moz-transition: background .2s ease;
+  -ms-transition: background .2s ease;
+  -o-transition: background .2s ease;
+}
+
+.SwapFigureComponent .figures .figure:hover {
+  background: greenyellow;
+}
+
+.SwapFigureComponent .figures .figure:active {
+  transform: scale(.95);
+  -webkit-transform: scale(.95);
+  -moz-transform: scale(.95);
+  -ms-transform: scale(.95);
+  -o-transform: scale(.95);
+}
+
+.SwapFigureComponent .figures .figure .figure__logo {
+  width: 90%;
+  height: 90%;
+}

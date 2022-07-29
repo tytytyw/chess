@@ -46,11 +46,17 @@ export class Pawn extends Figure {
 
         const dy = target.y - this.cell.y
         const longMove = Math.abs(dy) === 2
+        // for EnPassant
         if (longMove) {
             const cell = target.board.getCell(target.x, dy === 2 ? target.y - 1 : target.y + 1)
             cell.playerColor = this.color
             target.board.enPassantCell = cell
             this.aviableToEnPassant = true
+        }
+        // Promotion
+        if (target.y === 0 || target.y === 7) {
+            target.figure = null
+            console.log('Promotion')
         }
         super.moveFigure(target)
     }

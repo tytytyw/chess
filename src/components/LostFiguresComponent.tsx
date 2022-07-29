@@ -6,7 +6,7 @@ interface LostFiguresProps {
     title: string
 }
 
-const LostFiguresComponent: FC<LostFiguresProps> = ({ figures, title }) => {
+const LostFiguresComponent: FC<LostFiguresProps> = ({ figures }) => {
     return (
         <div className='LostFiguresComponent'>
 

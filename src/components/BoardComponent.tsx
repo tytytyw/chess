@@ -3,6 +3,7 @@ import { Board } from '../models/Board'
 import { Cell } from '../models/Cell';
 import { Player } from '../models/Player';
 import CellComponent from './CellComponent';
+import SwapFigureComponent from './SwapFigureComponent';
 
 interface BoardProps {
   board: Board;
@@ -14,6 +15,7 @@ interface BoardProps {
 const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPlayer }) => {
 
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
+  const [swapFigure, setSwapFigure] = useState<Cell | null>(null)
 
   const onCellClick = (cell: Cell) => {
     if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
@@ -40,6 +42,10 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPl
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCell])
 
+  // TODO:
+  useEffect(() => {
+    // board.cells.length && setSwapFigure(board.getCell(0, 1))
+  }, [board])
 
   return (
     <div className='BoardComponent'>
@@ -56,7 +62,9 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPl
             />
           )}
         </React.Fragment>)}
-      </div ></div>
+      </div >
+      {swapFigure ? <SwapFigureComponent cell={swapFigure} currentPlayer={currentPlayer} /> : ""}
+    </div>
   )
 }
 

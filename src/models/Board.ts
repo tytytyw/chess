@@ -20,9 +20,9 @@ export class Board {
             const row: Cell[] = []
             for (let x = 0; x < 8; x++) {
                 if ((x + y) % 2 !== 0) {
-                    row.push(new Cell(this, x, y, Colors.BLACK, null, true)) // black
+                    row.push(new Cell(this, x, y, Colors.BLACK, null, false)) // black
                 } else {
-                    row.push(new Cell(this, x, y, Colors.WHITE, null, true)) // white
+                    row.push(new Cell(this, x, y, Colors.WHITE, null, false)) // white
                 }
             }
             this.cells.push(row);
@@ -37,6 +37,8 @@ export class Board {
     private addPawns(): void {
         for (let x = 0; x < 8; x++) {
             new Pawn(Colors.BLACK, this.getCell(x, 1))
+            // if (x !== 1) new Pawn(Colors.BLACK, this.getCell(x, 1))
+            // new Pawn(Colors.WHITE, this.getCell(x, x === 1 ? 1 : 6))
             new Pawn(Colors.WHITE, this.getCell(x, 6))
         }
     }
